@@ -1,0 +1,16 @@
+{
+    "name": "args/args",
+    "description": "A command line args parser",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Args\\Args\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "liyuchuan"
+        }
+    ],
+    "require": {}
+}
