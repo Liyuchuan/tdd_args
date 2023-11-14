@@ -8,24 +8,29 @@ class Args
 
     private array $args;
 
+    private array $map;
+
     public function __construct(array $options, array $args)
     {
+        $this->initMap();
         $this->options = $options;
         $this->args = $args;
     }
 
+    private function initMap()
+    {
+        $this->map = [
+            'bool' => new BooleanOptionParser(),
+            'int' => new SingleValuedOptionParser('intval'),
+            'string' => new SingleValuedOptionParser('strval'),
+        ];
+    }
+
     public function getArgument(string $argName): mixed
     {
-        $value = null;
-        if ($this->options[$argName] == 'bool') {
-            $value = in_array("-$argName", $this->args);
-        } else if ($this->options[$argName] == 'int') {
-            $index = array_search("-$argName", $this->args);
-            $value = (int)$this->args[$index + 1];
-        } else if ($this->options[$argName] == 'string') {
-            $index = array_search("-$argName", $this->args);
-            $value = $this->args[$index + 1];
-        }
-        return $value;
+        $parser = $this->map[$this->options[$argName]];
+        return $parser->parse($this->args, $argName);
     }
+
 }
+
