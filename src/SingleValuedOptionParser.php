@@ -14,8 +14,13 @@ class SingleValuedOptionParser implements OptionParser
 
     public function parse(array $args, string $argName): mixed
     {
-        $value = $args[array_search("-$argName", $args) + 1];
-        return $this->parseValue($value);
+
+        $index = array_search("-$argName", $args);
+        $haystack = $args[$index + 2];
+        if (!str_starts_with($haystack, '-')) {
+            throw new TooManyArgumentsException();
+        }
+        return $this->parseValue($args[$index + 1]);
     }
 
     /**

@@ -41,18 +41,5 @@ it('当给定 -d /usr/logs 时，应该返回 /usr/logs', function () {
     expect($result)->toEqual('/usr/logs');
 });
 
-## Sad path
-todo('-l t');
-todo('t');
-todo('-p');
-todo('-p 8080 8081');
-todo('-d');
-todo('-d /usr/logs /usr/local');
-
-## Default value
-todo('bool: false');
-todo('int: 0');
-todo('string: ""');
-
 # Multi options
 todo('-l -p 8080 -d /usr/logs');
